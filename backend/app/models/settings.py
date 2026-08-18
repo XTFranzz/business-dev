@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import Boolean, Enum, ForeignKey, String, UniqueConstraint
+from sqlalchemy import Boolean, Enum, String, UniqueConstraint
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -28,11 +28,8 @@ class ApiProvider(Base, UUIDPkMixin):
 
 class Setting(Base, UUIDPkMixin):
     __tablename__ = "settings"
-    __table_args__ = (UniqueConstraint("user_id", "key"),)
+    __table_args__ = (UniqueConstraint("key"),)
 
-    user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("profiles.id", ondelete="CASCADE")
-    )
     key: Mapped[str] = mapped_column(String(100))
     value: Mapped[dict] = mapped_column(JSONB)
 
@@ -40,9 +37,6 @@ class Setting(Base, UUIDPkMixin):
 class AuditLog(Base, UUIDPkMixin, TimestampMixin):
     __tablename__ = "audit_logs"
 
-    user_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("profiles.id", ondelete="SET NULL"), nullable=True
-    )
     action: Mapped[str] = mapped_column(String(100))
     entity_type: Mapped[str] = mapped_column(String(100))
     entity_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)

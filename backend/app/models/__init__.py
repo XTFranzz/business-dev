@@ -7,7 +7,6 @@ from app.models.business import (
     LeadScore,
     WebsiteAnalysis,
 )
-from app.models.profile import Profile
 from app.models.search import SavedSearch, SearchJob, SearchResult
 from app.models.settings import ApiProvider, AuditLog, Setting
 
@@ -19,7 +18,6 @@ __all__ = [
     "BusinessWebsite",
     "LeadScore",
     "WebsiteAnalysis",
-    "Profile",
     "SavedSearch",
     "SearchJob",
     "SearchResult",

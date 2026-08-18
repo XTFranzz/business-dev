@@ -13,9 +13,6 @@ from app.models.mixins import TimestampMixin, UUIDPkMixin
 class SearchJob(Base, UUIDPkMixin, TimestampMixin):
     __tablename__ = "search_jobs"
 
-    user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("profiles.id", ondelete="CASCADE")
-    )
     params: Mapped[dict] = mapped_column(JSONB)
     status: Mapped[SearchJobStatus] = mapped_column(
         Enum(
@@ -57,8 +54,5 @@ class SearchResult(Base, UUIDPkMixin, TimestampMixin):
 class SavedSearch(Base, UUIDPkMixin, TimestampMixin):
     __tablename__ = "saved_searches"
 
-    user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("profiles.id", ondelete="CASCADE")
-    )
     name: Mapped[str] = mapped_column(String(255))
     params: Mapped[dict] = mapped_column(JSONB)
