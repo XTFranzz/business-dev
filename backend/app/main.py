@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.v1.discover import router as discover_router
 from app.api.v1.health import router as health_router
+from app.api.v1.leads import router as leads_router
 from app.core.config import get_settings
 from app.core.logging import configure_logging
 
@@ -19,3 +21,5 @@ app.add_middleware(
 )
 
 app.include_router(health_router, prefix="/api/v1")
+app.include_router(discover_router, prefix="/api/v1")
+app.include_router(leads_router, prefix="/api/v1")
