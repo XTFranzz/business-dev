@@ -9,9 +9,18 @@ from app.models import SearchJob
 from app.schemas.discover import DiscoverJobCreate, DiscoverJobRead
 from app.services.jobs.runner import run_search_job
 from app.services.providers.base import DiscoveryParams
-from app.services.providers.registry import ProviderNotConfiguredError, get_discovery_provider
+from app.services.providers.registry import (
+    DISCOVERY_PROVIDERS,
+    ProviderNotConfiguredError,
+    get_discovery_provider,
+)
 
 router = APIRouter(prefix="/discover", tags=["discover"])
+
+
+@router.get("/providers")
+def list_providers() -> dict:
+    return {"providers": list(DISCOVERY_PROVIDERS)}
 
 
 @router.get("/test")
@@ -21,16 +30,17 @@ async def test_discovery(
     state: str | None = Query(None),
     city: str | None = Query(None),
     max_results: int = Query(10, ge=1, le=60),
+    provider: str = Query("google_places"),
 ) -> dict:
     try:
-        provider = get_discovery_provider()
+        provider_instance = get_discovery_provider(provider)
     except ProviderNotConfiguredError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
 
     params = DiscoveryParams(
         country=country, state=state, city=city, category=category, max_results=max_results
     )
-    businesses = await provider.search(params)
+    businesses = await provider_instance.search(params)
     return {"count": len(businesses), "results": [asdict(b) for b in businesses]}
 
 
@@ -41,7 +51,7 @@ def create_search_job(
     db: Session = Depends(get_db),
 ) -> SearchJob:
     try:
-        get_discovery_provider()
+        get_discovery_provider(payload.provider)
     except ProviderNotConfiguredError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
 

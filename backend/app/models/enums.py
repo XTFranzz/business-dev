@@ -5,6 +5,11 @@ class BusinessStatus(str, enum.Enum):
     NEW = "new"
     QUALIFIED = "qualified"
     REVIEWED = "reviewed"
+    CONTACTED = "contacted"
+    REPLIED = "replied"
+    INTERESTED = "interested"
+    NOT_INTERESTED = "not_interested"
+    WON = "won"
     ARCHIVED = "archived"
     DO_NOT_CONTACT = "do_not_contact"
 
@@ -44,3 +49,39 @@ class ApiProviderType(str, enum.Enum):
     DISCOVERY = "discovery"
     WEBSITE = "website"
     AI = "ai"
+
+
+class CampaignStatus(str, enum.Enum):
+    DRAFT = "draft"
+    ACTIVE = "active"
+    PAUSED = "paused"
+    COMPLETED = "completed"
+
+
+class CampaignLeadStatus(str, enum.Enum):
+    PENDING = "pending"
+    APPROVED = "approved"
+    SENT = "sent"
+    FAILED = "failed"
+    SKIPPED = "skipped"
+
+
+class MessageChannel(str, enum.Enum):
+    EMAIL = "email"
+    MANUAL_COPY = "manual_copy"
+
+
+class MessageStatus(str, enum.Enum):
+    DRAFT = "draft"
+    PENDING_APPROVAL = "pending_approval"
+    APPROVED = "approved"
+    SENT = "sent"
+    FAILED = "failed"
+
+
+class MessageEventType(str, enum.Enum):
+    SENT = "sent"
+    FAILED = "failed"
+    BOUNCED = "bounced"
+    REPLIED = "replied"
+    UNSUBSCRIBED = "unsubscribed"

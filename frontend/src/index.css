@@ -23,6 +23,14 @@
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --radius: 0.625rem;
+
+  /* Chart tokens (dataviz reference palette) */
+  --chart-surface: #fcfcfb;
+  --chart-grid: #e1e0d9;
+  --chart-baseline: #c3c2b7;
+  --chart-ink-secondary: #52514e;
+  --chart-ink-muted: #898781;
+  --chart-series-1: #2a78d6;
 }
 
 .dark {
@@ -45,6 +53,14 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
+
+  /* Chart tokens (dataviz reference palette, dark) */
+  --chart-surface: #1a1a19;
+  --chart-grid: #2c2c2a;
+  --chart-baseline: #383835;
+  --chart-ink-secondary: #c3c2b7;
+  --chart-ink-muted: #898781;
+  --chart-series-1: #3987e5;
 }
 
 @theme inline {

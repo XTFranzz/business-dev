@@ -7,6 +7,7 @@ import Leads from "@/pages/Leads"
 import LeadDetail from "@/pages/LeadDetail"
 import Discover from "@/pages/Discover"
 import Campaigns from "@/pages/Campaigns"
+import CampaignDetail from "@/pages/CampaignDetail"
 import Messages from "@/pages/Messages"
 import Templates from "@/pages/Templates"
 import Analytics from "@/pages/Analytics"
@@ -25,6 +26,7 @@ function App() {
             <Route path="leads/:id" element={<LeadDetail />} />
             <Route path="discover" element={<Discover />} />
             <Route path="campaigns" element={<Campaigns />} />
+            <Route path="campaigns/:id" element={<CampaignDetail />} />
             <Route path="messages" element={<Messages />} />
             <Route path="templates" element={<Templates />} />
             <Route path="analytics" element={<Analytics />} />

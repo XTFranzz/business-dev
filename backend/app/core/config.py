@@ -18,6 +18,11 @@ class Settings(BaseSettings):
     google_places_api_key: str = ""
     openai_api_key: str = ""
 
+    gmail_address: str = ""
+    gmail_app_password: str = ""
+    smtp_host: str = "smtp.gmail.com"
+    smtp_port: int = 465
+
     cors_origins: str = "http://localhost:5173"
 
     @property

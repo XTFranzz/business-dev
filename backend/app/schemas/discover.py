@@ -12,6 +12,7 @@ class DiscoverJobCreate(BaseModel):
     state: str | None = None
     city: str | None = None
     max_results: int = Field(default=20, ge=1, le=60)
+    provider: str = "google_places"
 
 
 class DiscoverJobRead(BaseModel):
